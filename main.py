@@ -29,7 +29,7 @@ def main():
             filtro(busqueda(match_option))
         elif menu == '2':
             print(get_user().mostrar())
-            mapa = crear
+            
             break
 
 

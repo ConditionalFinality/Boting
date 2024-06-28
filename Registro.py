@@ -73,7 +73,7 @@ def registro(db):
 
     return team_list, stadium_list, match_list
 
-def valid(atr, list, value):
+def valid_obj(atr, list, value):
     # Esta funcion puede validar una entrada en base a si existe como atributo dentro de un objeto, revisando cada uno de los objetos.
     # En caso de encontrar el valor deseado, retorna True, y de lo contrario, retorna False.
     attribute_list = []
@@ -167,27 +167,53 @@ def filtro(m_list):
         i += 1
         print(f'\n{i}) {match.mostrar()}\n')
 
-def valid_int(value):
+def valid_name(value):
+    try:
+        
+        
+
+
+def valid_dni(value):
     try:
         value = int(value)
+        if len(str(value)) < 6 or :
+            print('Cedula invalida.')
+        return(value)
     except:
         print('Entrada invalida.')
-        attr_check = None
-        return
-        
+        return None
     
+def valid_age(value):
+    try:
+        value = int(value) > 120
+        return value
+    except:
+        print('Entrada invalida.')
+        return None
+    
+def valid_match(value):
+    try:
+        value = int(value)
+        if value < 1 or value > 36:
+            print('Este partido no existe')
+            return None
+        return value
+    except:
+        print('Entrada invalida.')
+        return None
 
+def valid_user(user):
+    for attr in getattr(user, attr):
 
 def get_user():
     print('Introduzca los siguientes datos:')
     nombre = input('Nombre:\n')
-    cedula = input('Cédula:\n')
-    valid_int(cedula)
-    edad = input('Edad:\n')
-    valid_int(edad)
+    cedula = valid_dni(input('Cedula:\n'))
+    edad = valid_age(input('Edad:\n'))
+    
     filtro(match_list)
     match_select = input('Seleccione un partido: ')
-    valid_int(match_select)
+    valid_match(match_select)
 
     for match in match_list:
             if match_list.index(match) == match_select - 1:
@@ -201,14 +227,15 @@ def get_user():
         vip = True
     else:
         print('Entrada invalida.')
-        return None
+        vip = None
+        return
     
     user = Cliente(nombre, cedula, edad, partido, vip)
     user_list.append(user)
 
     return user
 
-def make_map(rows, columns):
+#def make_map(rows, columns):
     map = []
     for row in range(rows):
         aux = []
@@ -216,6 +243,37 @@ def make_map(rows, columns):
             aux.append(False)
         map.append(aux)
     return map
+
+
+#def show_map_general(map):
+    print('*' * len(map[1]) + ' Estadio ' + '*' * len(map[1]))
+    print('\n')
+
+    seat = '   '
+    for i, x in enumerate(map[1]):
+        if i > 8:
+            seat += str(i+1)+'| '
+        else:
+            seat += str(i+1)+'| '
+    print(seat)
+
+#print(show_map_general(make_map(10,10)))
+
+
+# def show_map_vip(map):
+
+def ticket_cost(user):
+    cost = 0
+    if user.vip == False:
+        cost += 35
+    elif user.vip == True:
+        cost += 75
+    elif user.vip == None:
+        print('Usuario no tiene ticket.')
+        return
+    
+
+
 
 
 
